@@ -1,4 +1,5 @@
 using EmployeesManagement.Data.Extensions;
+using EmployeesManagement.Foundation.Extensions;
 
 namespace EmployeesManagement
 {
@@ -10,6 +11,8 @@ namespace EmployeesManagement
 
             // Add services to the container.
             builder.Services.AddEmployeesDbContext(builder.Configuration);
+            builder.Services.AddRepositories();
+            builder.Services.AddServices();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

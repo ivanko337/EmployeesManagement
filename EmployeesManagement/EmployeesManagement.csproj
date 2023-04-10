@@ -16,12 +16,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\EmployeesManagement.DomainModel\EmployeesManagement.Domain.csproj" />
 		<ProjectReference Include="..\EmployeesManagement.Foundation\EmployeesManagement.Foundation.csproj" />
 		<ProjectReference Include="..\EmployeesManagement.Repositories\EmployeesManagement.Data.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Controllers\" />
 	</ItemGroup>
 
 </Project>

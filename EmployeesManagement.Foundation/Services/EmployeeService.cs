@@ -1,6 +1,5 @@
 ﻿using EmployeesManagement.Data.Repositories;
 using EmployeesManagement.Domain.Models;
-using EmployeesManagement.Data.Repositories;
 
 namespace EmployeesManagement.Foundation.Services
 {
@@ -32,18 +31,13 @@ namespace EmployeesManagement.Foundation.Services
 
         public async Task<Employee> UpdateEmployee(int id, Employee updatedEmployee)
         {
-            var employee = await _employeeRepository.GetEmployeeByIdAsync(id);
-            if (employee == null)
+            var exists = await _employeeRepository.ExistsAsync(id);
+            if (!exists)
             {
                 throw new ArgumentException("Employee not found", nameof(id));
             }
 
-            employee.FirstName = updatedEmployee.FirstName;
-            employee.SecondName = updatedEmployee.SecondName;
-            employee.Patronymic = updatedEmployee.Patronymic;
-            employee.BirthDate = updatedEmployee.BirthDate;
-
-            return await _employeeRepository.UpdateEmployeeAsync(employee);
+            return await _employeeRepository.UpdateEmployeeAsync(updatedEmployee);
         }
 
         public async Task DeleteEmployee(int id)

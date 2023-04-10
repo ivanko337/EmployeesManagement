@@ -64,6 +64,12 @@ namespace EmployeesManagement.Data.Repositories
             return await query.FirstOrDefaultAsync();
         }
 
+        public async Task<bool> ExistsAsync(int id)
+        {
+            var employee = await _context.Employees.FirstOrDefaultAsync(e => e.Id == id);
+            return employee == null;
+        }
+
         private IQueryable<Employee> GetQuery()
         {
             return _context.Employees.Include(e => e.EmployeePositions);

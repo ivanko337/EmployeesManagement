@@ -58,6 +58,12 @@ namespace EmployeesManagement.Data.Repositories
             return updatedPosition;
         }
 
+        public async Task<bool> ExistsAsync(int id)
+        {
+            var position = await _context.Positions.FirstOrDefaultAsync(e => e.Id == id);
+            return position == null;
+        }
+
         public async Task DeletePositionAsync(Position position)
         {
             _context.Positions.Remove(position);
