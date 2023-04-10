@@ -14,22 +14,22 @@ namespace EmployeesManagement.Foundation.Services
             _positionRepository = positionRepository;
         }
 
-        public async Task<IEnumerable<Employee>> GetAllEmployees()
+        public async Task<IEnumerable<Employee>> GetAllEmployeesAsync()
         {
             return await _employeeRepository.GetAllEmployeesAsync();
         }
 
-        public async Task<Employee> GetEmployeeById(int id)
+        public async Task<Employee> GetEmployeeByIdAsync(int id)
         {
             return await _employeeRepository.GetEmployeeByIdAsync(id);
         }
 
-        public async Task<Employee> CreateEmployee(Employee newEmployee)
+        public async Task<Employee> CreateEmployeeAsync(Employee newEmployee)
         {
             return await _employeeRepository.CreateEmployeeAsync(newEmployee);
         }
 
-        public async Task<Employee> UpdateEmployee(int id, Employee updatedEmployee)
+        public async Task<Employee> UpdateEmployeeAsync(int id, Employee updatedEmployee)
         {
             var exists = await _employeeRepository.ExistsAsync(id);
             if (!exists)
@@ -40,7 +40,7 @@ namespace EmployeesManagement.Foundation.Services
             return await _employeeRepository.UpdateEmployeeAsync(updatedEmployee);
         }
 
-        public async Task DeleteEmployee(int id)
+        public async Task DeleteEmployeeAsync(int id)
         {
             var employee = await _employeeRepository.GetEmployeeByIdAsync(id);
             if (employee == null)

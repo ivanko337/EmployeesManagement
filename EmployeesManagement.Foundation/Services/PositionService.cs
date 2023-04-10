@@ -19,17 +19,17 @@ namespace EmployeesManagement.Foundation.Services
             return await _positionRepository.GetAllPositionsAsync();
         }
 
-        public async Task<Position> GetPositionById(int id)
+        public async Task<Position> GetPositionByIdAsync(int id)
         {
             return await _positionRepository.GetPositionByIdAsync(id);
         }
 
-        public async Task<Position> CreatePosition(Position newPosition)
+        public async Task<Position> CreatePositionAsync(Position newPosition)
         {
             return await _positionRepository.CreatePositionAsync(newPosition);
         }
 
-        public async Task<Position> UpdatePosition(int id, Position updatedPosition)
+        public async Task<Position> UpdatePositionAsync(int id, Position updatedPosition)
         {
             var position = await _positionRepository.GetPositionByIdAsync(id);
             if (position == null)
@@ -43,7 +43,7 @@ namespace EmployeesManagement.Foundation.Services
             return await _positionRepository.UpdatePositionAsync(position);
         }
 
-        public async Task DeletePosition(int id)
+        public async Task DeletePositionAsync(int id)
         {
             var position = await _positionRepository.GetPositionByIdAsync(id);
             if (position == null)
