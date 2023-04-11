@@ -1,5 +1,7 @@
 using EmployeesManagement.Extensions;
 using EmployeesManagement.Filters;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 
 namespace EmployeesManagement
 {

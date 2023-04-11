@@ -2,6 +2,7 @@
 using EmployeesManagement.Data.Extensions;
 using EmployeesManagement.Filters;
 using EmployeesManagement.Foundation.Extensions;
+using FluentValidation;
 
 namespace EmployeesManagement.Extensions
 {
@@ -16,6 +17,8 @@ namespace EmployeesManagement.Extensions
             services.AddScoped<ExceptionsHandlerFilter>();
 
             services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
+
+            services.AddValidatorsFromAssemblyContaining<Program>(ServiceLifetime.Scoped);
 
             return services;
         }

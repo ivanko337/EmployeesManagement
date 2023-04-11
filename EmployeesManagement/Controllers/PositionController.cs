@@ -4,11 +4,9 @@ using EmployeesManagement.Dtos;
 using EmployeesManagement.Foundation.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace PositionsManagement.Controllers
+namespace EmployeesManagement.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PositionController : ControllerBase
+    public class PositionController : BaseApiController
     {
         private readonly IPositionService _positionService;
         private readonly IMapper _mapper;
@@ -44,6 +42,12 @@ namespace PositionsManagement.Controllers
         [HttpPost]
         public async Task<ActionResult<GetPositionDto>> CreatePositionAsync(CreatePositionDto dto)
         {
+            var validationResult = await ValidateAsync(dto);
+            if (!validationResult.IsValid)
+            {
+                return BadRequestOnFailedValidation(validationResult);
+            }
+
             var position = _mapper.Map<Position>(dto);
 
             var resultPosition = await _positionService.CreatePositionAsync(position);
@@ -57,6 +61,12 @@ namespace PositionsManagement.Controllers
             int id,
             [FromBody] UpdatePositionDto dto)
         {
+            var validationResult = await ValidateAsync(dto);
+            if (!validationResult.IsValid)
+            {
+                return BadRequestOnFailedValidation(validationResult);
+            }
+
             try
             {
                 var position = _mapper.Map<Position>(dto);

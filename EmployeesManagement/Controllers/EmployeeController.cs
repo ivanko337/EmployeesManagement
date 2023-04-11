@@ -2,13 +2,13 @@
 using EmployeesManagement.Domain.Models;
 using EmployeesManagement.Dtos;
 using EmployeesManagement.Foundation.Services;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeesManagement.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class EmployeeController : ControllerBase
+    public class EmployeeController : BaseApiController
     {
         private readonly IEmployeeService _employeeService;
         private readonly IMapper _mapper;
@@ -43,6 +43,12 @@ namespace EmployeesManagement.Controllers
         [HttpPost]
         public async Task<ActionResult<GetEmployeeDto>> CreateEmployeeAsync(CreateEmployeeDto dto)
         {
+            var validationResult = await ValidateAsync(dto);
+            if (!validationResult.IsValid)
+            {
+                return BadRequestOnFailedValidation(validationResult);
+            }
+
             var employee = _mapper.Map<Employee>(dto);
 
             var resultEmployee = await _employeeService.CreateEmployeeAsync(employee);
@@ -56,6 +62,12 @@ namespace EmployeesManagement.Controllers
             int id,
             [FromBody] UpdateEmployeeDto dto)
         {
+            var validationResult = await ValidateAsync(dto);
+            if (!validationResult.IsValid)
+            {
+                return BadRequestOnFailedValidation(validationResult);
+            }
+
             try
             {
                 var employee = _mapper.Map<Employee>(dto);
@@ -81,14 +93,26 @@ namespace EmployeesManagement.Controllers
         [HttpPut("addPosition")]
         public async Task<ActionResult> AddPositionToEmployeeAsync(AddPositionToEmployeeDto dto)
         {
+            var validationResult = await ValidateAsync(dto);
+            if (!validationResult.IsValid)
+            {
+                return BadRequestOnFailedValidation(validationResult);
+            }
+
             await _employeeService.AddPositionToEmployeeAsync(dto.EmployeeId, dto.PositionId);
 
             return Ok();
         }
 
         [HttpPut("removePosition")]
-        public async Task<ActionResult> RemovePositionToEmployeeAsync(RemovePositionToEmployeeDto dto)
+        public async Task<ActionResult> RemovePositionToEmployeeAsync(RemovePositionFromEmployeeDto dto)
         {
+            var validationResult = await ValidateAsync(dto);
+            if (!validationResult.IsValid)
+            {
+                return BadRequestOnFailedValidation(validationResult);
+            }
+
             await _employeeService.RemovePositionFromEmployeeAsync(dto.EmployeeId, dto.PositionId);
 
             return Ok();

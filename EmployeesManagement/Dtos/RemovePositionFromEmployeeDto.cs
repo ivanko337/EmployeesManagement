@@ -1,6 +1,6 @@
 ﻿namespace EmployeesManagement.Dtos
 {
-    public class RemovePositionToEmployeeDto
+    public class RemovePositionFromEmployeeDto
     {
         public int EmployeeId { get; set; }
         public int PositionId { get; set; }
