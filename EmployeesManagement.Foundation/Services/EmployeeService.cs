@@ -57,6 +57,8 @@ namespace EmployeesManagement.Foundation.Services
             var position = await _positionRepository.GetPositionByIdAsync(positionId);
 
             employee.Positions.Add(position);
+
+            await _employeeRepository.UpdateEmployeeAsync(employee);
         }
 
         public async Task RemovePositionFromEmployeeAsync(int employeeId, int positionId)
@@ -65,6 +67,8 @@ namespace EmployeesManagement.Foundation.Services
             var position = await _positionRepository.GetPositionByIdAsync(positionId);
 
             employee.Positions.Remove(position);
+
+            await _employeeRepository.UpdateEmployeeAsync(employee);
         }
     }
 }

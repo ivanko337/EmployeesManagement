@@ -78,7 +78,7 @@ namespace EmployeesManagement.Controllers
             return Ok();
         }
 
-        [HttpPost("addPosition")]
+        [HttpPut("addPosition")]
         public async Task<ActionResult> AddPositionToEmployeeAsync(AddPositionToEmployeeDto dto)
         {
             await _employeeService.AddPositionToEmployeeAsync(dto.EmployeeId, dto.PositionId);
@@ -86,7 +86,7 @@ namespace EmployeesManagement.Controllers
             return Ok();
         }
 
-        [HttpPost("removePosition")]
+        [HttpPut("removePosition")]
         public async Task<ActionResult> RemovePositionToEmployeeAsync(RemovePositionToEmployeeDto dto)
         {
             await _employeeService.RemovePositionFromEmployeeAsync(dto.EmployeeId, dto.PositionId);
