@@ -72,7 +72,7 @@ namespace EmployeesManagement.Data.Repositories
 
         private IQueryable<Employee> GetQuery()
         {
-            return _context.Employees.Include(e => e.EmployeePositions);
+            return _context.Employees.Include(e => e.Positions);
         }
     }
 }
