@@ -33,7 +33,7 @@ namespace EmployeesManagement.Data.Repositories
 
         public async Task<Employee> UpdateEmployeeAsync(Employee updatedEmployee)
         {
-            _context.Entry(updatedEmployee).State = EntityState.Modified;
+            _context.Update(updatedEmployee);
             await _context.SaveChangesAsync();
 
             return updatedEmployee;
@@ -66,8 +66,7 @@ namespace EmployeesManagement.Data.Repositories
 
         public async Task<bool> ExistsAsync(int id)
         {
-            var employee = await _context.Employees.FirstOrDefaultAsync(e => e.Id == id);
-            return employee != null;
+            return await _context.Employees.AnyAsync(e => e.Id == id);
         }
 
         private IQueryable<Employee> GetQuery()

@@ -14,8 +14,7 @@ namespace EmployeesManagement.Data.Repositories
         public async Task<int> GetEmployeesCountForPositionAsync(int positionId)
         {
             return await _context.EmployeePositions
-                .Where(ep => ep.PositionId == positionId)
-                .CountAsync();
+                .CountAsync(ep => ep.PositionId == positionId);
         }
     }
 }

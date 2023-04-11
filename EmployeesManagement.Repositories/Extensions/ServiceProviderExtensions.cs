@@ -36,8 +36,6 @@ namespace EmployeesManagement.Data.Extensions
                                 Grade = 15
                             },
                         });
-
-                        context.SaveChanges();
                     }
 
                     if (!context.Employees.Any())
@@ -60,6 +58,8 @@ namespace EmployeesManagement.Data.Extensions
                             }
                         });
                     }
+                    
+                    context.SaveChanges();
                 }
                 catch (Exception ex)
                 {

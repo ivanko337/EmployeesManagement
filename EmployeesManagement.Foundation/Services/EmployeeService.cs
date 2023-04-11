@@ -31,11 +31,12 @@ namespace EmployeesManagement.Foundation.Services
 
         public async Task<Employee> UpdateEmployeeAsync(int id, Employee updatedEmployee)
         {
-            var exists = await _employeeRepository.ExistsAsync(id);
-            if (!exists)
+            if (!await _employeeRepository.ExistsAsync(id))
             {
                 throw new ArgumentException("Employee not found", nameof(id));
             }
+
+            updatedEmployee.Id = id;
 
             return await _employeeRepository.UpdateEmployeeAsync(updatedEmployee);
         }

@@ -31,16 +31,14 @@ namespace EmployeesManagement.Foundation.Services
 
         public async Task<Position> UpdatePositionAsync(int id, Position updatedPosition)
         {
-            var position = await _positionRepository.GetPositionByIdAsync(id);
-            if (position == null)
+            if (!await _positionRepository.ExistsAsync(id))
             {
                 throw new ArgumentException("Position not found", nameof(id));
             }
 
-            position.Title = updatedPosition.Title;
-            position.Grade = updatedPosition.Grade;
+            updatedPosition.Id = id;
 
-            return await _positionRepository.UpdatePositionAsync(position);
+            return await _positionRepository.UpdatePositionAsync(updatedPosition);
         }
 
         public async Task DeletePositionAsync(int id)
