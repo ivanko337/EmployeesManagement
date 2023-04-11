@@ -9,7 +9,7 @@ namespace EmployeesManagement.Foundation.Services
         Task<Employee> CreateEmployeeAsync(Employee newEmployee);
         Task<Employee> UpdateEmployeeAsync(int id, Employee updatedEmployee);
         Task DeleteEmployeeAsync(int id);
-        Task AddRoleToEmployeeAsync(int employeeId, int positionId);
-        Task RemoveRoleFromEmployeeAsync(int employeeId, int positionId);
+        Task AddPositionToEmployeeAsync(int employeeId, int positionId);
+        Task RemovePositionFromEmployeeAsync(int employeeId, int positionId);
     }
 }

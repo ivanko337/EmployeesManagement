@@ -51,7 +51,7 @@ namespace EmployeesManagement.Foundation.Services
             await _employeeRepository.DeleteEmployeeAsync(employee);
         }
 
-        public async Task AddRoleToEmployeeAsync(int employeeId, int positionId)
+        public async Task AddPositionToEmployeeAsync(int employeeId, int positionId)
         {
             var employee = await _employeeRepository.GetEmployeeByIdAsync(employeeId);
             var position = await _positionRepository.GetPositionByIdAsync(positionId);
@@ -59,7 +59,7 @@ namespace EmployeesManagement.Foundation.Services
             employee.Positions.Add(position);
         }
 
-        public async Task RemoveRoleFromEmployeeAsync(int employeeId, int positionId)
+        public async Task RemovePositionFromEmployeeAsync(int employeeId, int positionId)
         {
             var employee = await _employeeRepository.GetEmployeeByIdAsync(employeeId);
             var position = await _positionRepository.GetPositionByIdAsync(positionId);

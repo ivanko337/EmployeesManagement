@@ -77,5 +77,21 @@ namespace EmployeesManagement.Controllers
             await _employeeService.DeleteEmployeeAsync(id);
             return Ok();
         }
+
+        [HttpPost("addPosition")]
+        public async Task<ActionResult> AddPositionToEmployeeAsync(AddPositionToEmployeeDto dto)
+        {
+            await _employeeService.AddPositionToEmployeeAsync(dto.EmployeeId, dto.PositionId);
+
+            return Ok();
+        }
+
+        [HttpPost("removePosition")]
+        public async Task<ActionResult> RemovePositionToEmployeeAsync(RemovePositionToEmployeeDto dto)
+        {
+            await _employeeService.RemovePositionFromEmployeeAsync(dto.EmployeeId, dto.PositionId);
+
+            return Ok();
+        }
     }
 }
