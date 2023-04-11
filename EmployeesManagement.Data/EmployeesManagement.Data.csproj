@@ -20,7 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\EmployeesManagement.DomainModel\EmployeesManagement.Domain.csproj" />
+	  <ProjectReference Include="..\EmployeesManagement.Domain\EmployeesManagement.Domain.csproj" />
 	</ItemGroup>
 
 </Project>
