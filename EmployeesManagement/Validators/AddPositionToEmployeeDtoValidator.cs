@@ -20,15 +20,19 @@ namespace EmployeesManagement.Validators
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty()
                 .MustAsync(EmployeeExists)
-                .WithMessage("Employee does not exists");
+                .WithMessage("Employee does not exists")
+                .DependentRules(() =>
+                {
+                    RuleFor(x => x.PositionId)
+                        .MustAsync(EmployeeAlreadyHavePosition)
+                        .WithMessage("Employee already have this position");
+                });
 
             RuleFor(x => x.PositionId)
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty()
                 .MustAsync(PositionExists)
-                .WithMessage("Position does not exists")
-                .MustAsync(EmployeeAlreadyHavePosition)
-                .WithMessage("Employee already have this position");
+                .WithMessage("Position does not exists");
         }
 
         private async Task<bool> EmployeeExists(int id, CancellationToken token)

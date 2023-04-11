@@ -6,9 +6,9 @@ namespace EmployeesManagement.Data.Extensions
 {
     public static class ServiceProviderExtensions
     {
-        public static IServiceProvider SeedDatabase(this IServiceProvider services)
+        public static IServiceProvider SeedDatabase(this IServiceProvider provider)
         {
-            using (var scope = services.CreateScope())
+            using (var scope = provider.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<EmployeesDbContext>();
                 var loggerFactory = scope.ServiceProvider.GetRequiredService<ILoggerFactory>();
@@ -67,7 +67,7 @@ namespace EmployeesManagement.Data.Extensions
                 }
             }
 
-            return services;
+            return provider;
         }
     }
 }

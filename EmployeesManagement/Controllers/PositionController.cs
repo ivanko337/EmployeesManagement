@@ -42,12 +42,6 @@ namespace EmployeesManagement.Controllers
         [HttpPost]
         public async Task<ActionResult<GetPositionDto>> CreatePositionAsync(CreatePositionDto dto)
         {
-            var validationResult = await ValidateAsync(dto);
-            if (!validationResult.IsValid)
-            {
-                return BadRequestOnFailedValidation(validationResult);
-            }
-
             var position = _mapper.Map<Position>(dto);
 
             var resultPosition = await _positionService.CreatePositionAsync(position);
@@ -61,12 +55,6 @@ namespace EmployeesManagement.Controllers
             int id,
             [FromBody] UpdatePositionDto dto)
         {
-            var validationResult = await ValidateAsync(dto);
-            if (!validationResult.IsValid)
-            {
-                return BadRequestOnFailedValidation(validationResult);
-            }
-
             try
             {
                 var position = _mapper.Map<Position>(dto);

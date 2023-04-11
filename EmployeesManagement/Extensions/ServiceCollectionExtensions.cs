@@ -15,6 +15,7 @@ namespace EmployeesManagement.Extensions
             services.AddServices();
 
             services.AddScoped<ExceptionsHandlerFilter>();
+            services.AddScoped<ModelValidationFilter>();
 
             services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 

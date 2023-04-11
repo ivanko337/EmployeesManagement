@@ -20,7 +20,7 @@ namespace EmployeesManagement.Data.Repositories
 
         public async Task<Employee> GetEmployeeByIdAsync(int id)
         {
-            return await GetQuery().SingleAsync(e => e.Id == id);
+            return await GetQuery().SingleOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task<Employee> CreateEmployeeAsync(Employee newEmployee)

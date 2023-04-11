@@ -1,6 +1,6 @@
 ﻿namespace EmployeesManagement.Dtos
 {
-    public class GetPositionDto
+    public class GetPositionDto : BaseDto
     {
         public int Id { get; set; }
         public string Title { get; set; } = default!;

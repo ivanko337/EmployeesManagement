@@ -1,6 +1,6 @@
 ﻿namespace EmployeesManagement.Dtos
 {
-    public class UpdateEmployeeDto
+    public class UpdateEmployeeDto : BaseDto
     {
         public string FirstName { get; set; } = default!;
         public string SecondName { get; set; } = default!;

@@ -21,6 +21,7 @@ namespace EmployeesManagement.Filters
 
             context.Result = new EmptyResult();
             context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            context.ExceptionHandled = true;
         }
     }
 }

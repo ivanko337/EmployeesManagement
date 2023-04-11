@@ -16,6 +16,7 @@ namespace EmployeesManagement
             builder.Services.AddControllers(options =>
             {
                 options.Filters.AddService(typeof(ExceptionsHandlerFilter));
+                options.Filters.AddService(typeof(ModelValidationFilter));
             });
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();

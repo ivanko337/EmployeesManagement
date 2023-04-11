@@ -20,7 +20,7 @@ namespace EmployeesManagement.Data.Repositories
 
         public async Task<Position> GetPositionByIdAsync(int id)
         {
-            return await _context.Positions.SingleAsync(e => e.Id == id);
+            return await _context.Positions.SingleOrDefaultAsync(e => e.Id == id);
         }
 
         public async Task<Position> GetFirstOrDefaultAsync<TKey>(
