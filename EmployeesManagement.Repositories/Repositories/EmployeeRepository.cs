@@ -67,7 +67,7 @@ namespace EmployeesManagement.Data.Repositories
         public async Task<bool> ExistsAsync(int id)
         {
             var employee = await _context.Employees.FirstOrDefaultAsync(e => e.Id == id);
-            return employee == null;
+            return employee != null;
         }
 
         private IQueryable<Employee> GetQuery()

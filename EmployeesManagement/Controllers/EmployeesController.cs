@@ -29,8 +29,15 @@ namespace EmployeesManagement.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<GetEmployeeDto>> GetEmployeeByIdAsync(int id)
         {
-            var employee = await _employeeService.GetEmployeeByIdAsync(id);
-            return Ok(_mapper.Map<GetEmployeeDto>(employee));
+            try
+            {
+                var employee = await _employeeService.GetEmployeeByIdAsync(id);
+                return Ok(_mapper.Map<GetEmployeeDto>(employee));
+            }
+            catch (InvalidOperationException)
+            {
+                return NotFound();
+            }
         }
 
         [HttpPost]
@@ -49,12 +56,19 @@ namespace EmployeesManagement.Controllers
             int id,
             [FromBody] UpdateEmployeeDto dto)
         {
-            var employee = _mapper.Map<Employee>(dto);
+            try
+            {
+                var employee = _mapper.Map<Employee>(dto);
 
-            var resultEmployee = await _employeeService.UpdateEmployeeAsync(id, employee);
-            var result = _mapper.Map<GetEmployeeDto>(resultEmployee);
+                var resultEmployee = await _employeeService.UpdateEmployeeAsync(id, employee);
+                var result = _mapper.Map<GetEmployeeDto>(resultEmployee);
 
-            return StatusCode(200, result);
+                return StatusCode(200, result);
+            }
+            catch (ArgumentException)
+            {
+                return NotFound();
+            }
         }
 
         [HttpDelete("{id:int}")]

@@ -61,7 +61,7 @@ namespace EmployeesManagement.Data.Repositories
         public async Task<bool> ExistsAsync(int id)
         {
             var position = await _context.Positions.FirstOrDefaultAsync(e => e.Id == id);
-            return position == null;
+            return position != null;
         }
 
         public async Task DeletePositionAsync(Position position)
