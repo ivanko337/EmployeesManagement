@@ -1,7 +1,6 @@
+using EmployeesManagement.Data.Extensions;
 using EmployeesManagement.Extensions;
 using EmployeesManagement.Filters;
-using FluentValidation.AspNetCore;
-using FluentValidation;
 
 namespace EmployeesManagement
 {
@@ -23,6 +22,8 @@ namespace EmployeesManagement
             builder.Services.AddSwaggerGen();
 
             var app = builder.Build();
+
+            app.Services.SeedDatabase();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
