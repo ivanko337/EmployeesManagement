@@ -73,8 +73,17 @@ namespace EmployeesManagement.Controllers
         [HttpDelete("{id:int}")]
         public async Task<ActionResult> DeletePositionAsync(int id)
         {
-            await _positionService.DeletePositionAsync(id);
-            return Ok();
+            try
+            {
+                await _positionService.DeletePositionAsync(id);
+
+                return Ok();
+            }
+            catch (ArgumentException ex)
+            {
+                ModelState.AddModelError("Position", ex.Message);
+                return BadRequest(ModelState);
+            }
         }
     }
 }

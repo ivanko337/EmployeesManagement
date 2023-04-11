@@ -11,10 +11,14 @@ namespace EmployeesManagement.Common
             CreateMap<Employee, GetEmployeeDto>();
             CreateMap<Position, GetPositionDto>();
 
-            CreateMap<CreateEmployeeDto, Employee>();
+            CreateMap<CreateEmployeeDto, Employee>()
+                .ForMember(dest => dest.BirthDate, opt => opt
+                    .MapFrom(src => src.BirthDate.Date));
             CreateMap<CreatePositionDto, Position>();
 
-            CreateMap<UpdateEmployeeDto, Employee>();
+            CreateMap<UpdateEmployeeDto, Employee>()
+                .ForMember(dest => dest.BirthDate, opt => opt
+                    .MapFrom(src => src.BirthDate.Date));
             CreateMap<UpdatePositionDto, Position>();
         }
     }

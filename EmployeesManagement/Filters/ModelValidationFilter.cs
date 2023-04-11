@@ -61,7 +61,11 @@ namespace EmployeesManagement.Filters
             var task = method!.Invoke(validator, new object[] { dto, CancellationToken.None }) as Task<ValidationResult>;
 
             var validationResult = await task;
-            if (!validationResult.IsValid)
+            if (validationResult.IsValid)
+            {
+                await next();
+            }
+            else
             {
                 var controller = context.Controller as ControllerBase;
 

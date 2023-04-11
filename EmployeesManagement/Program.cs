@@ -1,6 +1,8 @@
 using EmployeesManagement.Data.Extensions;
 using EmployeesManagement.Extensions;
 using EmployeesManagement.Filters;
+using FluentValidation;
+using System.Globalization;
 
 namespace EmployeesManagement
 {
@@ -8,6 +10,8 @@ namespace EmployeesManagement
     {
         public static void Main(string[] args)
         {
+            ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en-us");
+
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.

@@ -20,13 +20,13 @@ namespace EmployeesManagement.Validators
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty()
                 .MustAsync(EmployeeExists)
-                .WithMessage("Employee does not exists")
                 .DependentRules(() =>
                 {
                     RuleFor(x => x.PositionId)
                         .MustAsync(EmployeeAlreadyHavePosition)
                         .WithMessage("Employee already have this position");
-                });
+                })
+                .WithMessage("Employee does not exists");
 
             RuleFor(x => x.PositionId)
                 .Cascade(CascadeMode.Stop)
@@ -47,8 +47,8 @@ namespace EmployeesManagement.Validators
 
         private async Task<bool> EmployeeAlreadyHavePosition(AddPositionToEmployeeDto dto, int positionId, CancellationToken token)
         {
-            var employee = await _employeeRepository.GetEmployeeByIdAsync(positionId);
-            return employee.Positions.FirstOrDefault(p => p.Id == dto.PositionId) == null;
+            var employee = await _employeeRepository.GetEmployeeByIdAsync(dto.EmployeeId);
+            return employee.Positions.FirstOrDefault(p => p.Id == positionId) == null;
         }
     }
 }
