@@ -2,7 +2,7 @@
 
 namespace EmployeesManagement.Foundation.Services
 {
-    internal interface IPositionService
+    public interface IPositionService
     {
         Task<IEnumerable<Position>> GetAllPositionsAsync();
         Task<Position> GetPositionByIdAsync(int id);
