@@ -1,4 +1,5 @@
 ﻿using EmployeesManagement.Domain.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -6,7 +7,7 @@ namespace EmployeesManagement.Data.Extensions
 {
     public static class ServiceProviderExtensions
     {
-        public static IServiceProvider SeedDatabase(this IServiceProvider provider)
+        public static IServiceProvider MigrateAndSeedDatabase(this IServiceProvider provider)
         {
             using (var scope = provider.CreateScope())
             {
@@ -16,6 +17,8 @@ namespace EmployeesManagement.Data.Extensions
 
                 try
                 {
+                    context.Database.Migrate();
+
                     if (!context.Positions.Any())
                     {
                         context.AddRange(new[]

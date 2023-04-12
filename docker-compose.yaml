@@ -1,0 +1,28 @@
+version: '3.4'
+
+services:
+  employeesmanagement:
+    image: employeesmanagement:latest
+    restart: on-failure
+    depends_on:
+      - "mysql"
+    build:
+      context: ./
+    ports:
+      - "7206:80"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__Default: "Server=mysql;Port=3306;Database=EmployeesManagement;Uid=root;Pwd=my-secret-pw;"
+
+  mysql:
+    image: mysql:latest
+    restart: on-failure
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: "my-secret-pw"
+    volumes:
+      - employeesmanagement-data:/var/lib/mysql
+
+volumes:
+  employeesmanagement-data:

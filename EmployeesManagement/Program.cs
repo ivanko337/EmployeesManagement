@@ -28,7 +28,7 @@ namespace EmployeesManagement
 
             var app = builder.Build();
 
-            app.Services.SeedDatabase();
+            app.Services.MigrateAndSeedDatabase();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
